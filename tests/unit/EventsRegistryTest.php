@@ -32,7 +32,10 @@ class EventsRegistryTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals(true, $true);
         $this->assertEquals(0, $this->eventCounter);
+    }
 
+    public function testPriorityEvents()
+    {
         $eventsArray = events();
         $eventsArray->exchangeArray(array());
 
