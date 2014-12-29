@@ -1,0 +1,15 @@
+{
+    "name": "evaisse/php-function-events",
+    "description": "A simple function to manage events.",
+    "license": "GNU GPL V2",
+    "keywords": ["events", "simple", "functionnal"],
+    "authors": [
+        {
+            "name": "Emmanuel VAISSE",
+            "email": "evaisse@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.1"
+    }
+}
