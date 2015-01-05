@@ -3,6 +3,8 @@ php-function-events
 
 events() : A simple function to manage hooks and events on your php application.
 
+<img src="https://travis-ci.org/evaisse/php-function-events.svg"></img>
+
 
 Quickstart
 -----
