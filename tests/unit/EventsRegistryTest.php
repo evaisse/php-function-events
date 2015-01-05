@@ -66,6 +66,32 @@ class EventsRegistryTest extends PHPUnit_Framework_TestCase
     }
 
 
+    public function testEventsListenerArgumentsReference()
+    {
+        $eventsArray = events();
+        $eventsArray->exchangeArray(array());
+
+        events('add', 'foo.test', array($this, "incParams"));
+        events('add', 'foo.test', array($this, "incParams"));
+        events('add', 'foo.test', array($this, "incParams"));
+
+        events('trigger', 'foo.test', array(
+            'counter' => 1
+        ));
+
+        $this->assertEquals(4, $this->eventCounter);
+    }
+
+    /**
+     * Increment params key to verifiy references
+     * 
+     * @param  array $params [description]
+     */
+    public function incParams($params)
+    {
+        $params['counter']++;
+        $this->eventCounter = $params['counter'];
+    }
    
 
     public function inc($event)
@@ -80,7 +106,7 @@ class EventsRegistryTest extends PHPUnit_Framework_TestCase
 
     public function setTo($event)
     {
-        $this->eventCounter = $event['context']['value'];
+        $this->eventCounter = $event['value'];
     }
 
 

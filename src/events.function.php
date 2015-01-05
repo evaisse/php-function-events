@@ -102,16 +102,15 @@ if (!function_exists('events')) {
 
             $params = is_array($params) ? new ArrayObject($params) : new ArrayObject();
 
-            $args = new ArrayObject();
-            $args['name'] = $eventName; 
-            $args['context'] = $params;
+            $context = new ArrayObject();
+            $context['name'] = $eventName; 
             ob_start();
             debug_print_backtrace();
-            $args['trace'] = ob_get_clean(); 
+            $context['trace'] = ob_get_clean(); 
 
             foreach ($events[$eventName] as $key => $value) {
                 try {
-                    $break = call_user_func($value['callable'], $args);
+                    $break = call_user_func($value['callable'], $params, $context);
                 } catch (Exception $e) {
                     error_log($e);
                     $break = null;

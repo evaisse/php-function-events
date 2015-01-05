@@ -116,3 +116,26 @@ events('trigger', 'foo', array(
     'test' => 2
 ));
 ```
+
+
+
+
+Event listener signature
+----
+
+
+
+```php
+<?php
+
+/**
+ * A sample event listener callback
+ * 
+ * @param ArrayObject $params   A list of arguments/parameters passed to the events.   
+ * @param ArrayObject $context  Context informations for event call,  including "trace", event "name"
+ * @return boolean true if event can bubble, false if event should not be propagated
+ */
+function my_event_listener($params, $context)
+{
+    $var = $params['myValue'];
+}
