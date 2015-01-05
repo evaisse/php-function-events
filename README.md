@@ -34,7 +34,10 @@ events('add', 'foo.bar_example', 'ill_be_second', 8);
 events('add', 'foo.bar_example', 'ill_be_first', 1);
 
 // will call previous func
-events('trigger', 'foo.bar_example');
+events('trigger', 'foo.bar_example', array(
+    "myArgs" => 123,
+    "myCOntext" => array(),
+));
 ```
 
 
@@ -82,7 +85,7 @@ Events helpers
 ```php
 <?php
 
-// retrieve all resgitered events;
+// retrieve all registered events;
 $eventsList = events();
 
 ```
@@ -91,9 +94,25 @@ $eventsList = events();
 Events parameters references
 ------
 
+Each events listener recieve
+
 ```php
 <?php
 
+function one($params)
+{
+    $params['test'] = 2;
+}
 
+function two($params)
+{
+    $params['test']; // will be 2
+    // this will not be executed
+}
 
+events('add', 'foo', 'one');
+events('add', 'foo', 'two');
+events('trigger', 'foo', array(
+    'test' => 2
+));
 ```
