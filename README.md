@@ -11,12 +11,21 @@ Quickstart
 ```php
 <?php
 
+function my_user_func_cb($params, $context)
+{
+    error_log('[my_namespace] ' . isset($params['value']) ? $params['value'] : 0);
+}
+
 // register events
 events('add', 'foo.bar_example', 'my_user_func_cb');
-events('add', 'foo.bar_example', array($object, 'methodName'));
+// events('add', 'foo.bar_example', array($object, 'methodName'));
+// events('add', 'foo.bar_example', "Foo::bar");
+// events('add', 'foo.bar_example', $myClosure);
 
 // will call previous func
-events('trigger', 'foo.bar_example');
+events('trigger', 'foo.bar_example', array(
+    'value' => 42
+));
 ```
 
 
