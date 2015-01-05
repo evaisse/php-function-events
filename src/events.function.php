@@ -110,7 +110,12 @@ if (!function_exists('events')) {
             $args['trace'] = ob_get_clean(); 
 
             foreach ($events[$eventName] as $key => $value) {
-                $break = call_user_func($value['callable'], $args);
+                try {
+                    $break = call_user_func($value['callable'], $args);
+                } catch (Exception $e) {
+                    error_log($e);
+                    $break = null;
+                }
 
                 if ($value['once']) {
                     unset($events[$eventName][$key]); 
